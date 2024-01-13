@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:girlfriend_translator/pages/greeting.dart';
 import 'package:girlfriend_translator/pages/home.dart';
 
 //firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'package:girlfriend_translator/pages/wrapper.dart';
 import 'firebase_options.dart';
 
 
-void main()  {
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: Wrapper(),
     );
   }
 }

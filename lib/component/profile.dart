@@ -13,7 +13,8 @@ class Profile extends StatelessWidget {
       height: MediaQuery.of(context).size.height * .2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Colors.deepPurple
+        color: Colors.white,
+        boxShadow:[ BoxShadow(color: Colors.black, blurRadius: 4.0,)]
       ),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,

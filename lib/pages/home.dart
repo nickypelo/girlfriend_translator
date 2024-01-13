@@ -17,11 +17,12 @@ import 'package:girlfriend_translator/component/content/interests.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static List<String> names = ['Zamaswazi', 'Mantapela', 'Tadiwa'];
+  static Color hexColor = Color(0xFF360A14);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(
@@ -30,45 +31,52 @@ class HomePage extends StatelessWidget {
                 Accordion(
                   children: [
                     AccordionSection(
+                      headerBackgroundColor: Colors.white,
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
-                      header: Text('Word of the day', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                      header: Text('Word of the day', style: TextStyle(fontSize: 16.0,),),
                       content: Quote(),
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('Current Mood', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('Current Mood', style: TextStyle(fontSize: 16.0,),),
                         content: HerMood()
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('Food', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('Food', style: TextStyle(fontSize: 16.0,),),
                         content: Food()
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('Personality', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('Personality', style: TextStyle(fontSize: 16.0,),),
                         content: Personality()
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('Interests', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('Interests', style: TextStyle(fontSize: 16.0),),
                         content: Interests()
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('Music', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('Music', style: TextStyle(fontSize: 16.0),),
                         content: Music()
                     ),
                     AccordionSection(
+                        headerBackgroundColor: Colors.white,
                         headerPadding: EdgeInsets.all(8.0),
                         leftIcon: Icon(Icons.add),
-                        header: Text('What I like About You', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+                        header: Text('What I like About You', style: TextStyle(fontSize: 16.0),),
                         content: Highlights()
                     ),
                   ],

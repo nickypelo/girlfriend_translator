@@ -3,4 +3,6 @@ class Person{
   String? name;
   DateTime? dateOfBirth;
   String? partnerName;
+
+  Person({this.id, this.name, this.dateOfBirth, this.partnerName});
 }
