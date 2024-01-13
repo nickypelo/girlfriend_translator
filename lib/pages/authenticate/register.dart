@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/service/auth/authService.dart';
 import 'package:girlfriend_translator/utils/constants.dart';
 
+import '../../utils/loading.dart';
+
 class Register extends StatefulWidget {
   const Register({super.key, required this.toggleView});
 
@@ -13,6 +15,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // text field state
   String email = '';
@@ -21,7 +24,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.purple[100],
       appBar: AppBar(
         title: Text('Register', style: TextStyle(color: Colors.white),),
@@ -75,10 +78,14 @@ class _RegisterState extends State<Register> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
+                        setState(() {
+                          loading = true;
+                        });
                         dynamic result = await _auth.registration(email, pwd);
                         if(result == null){
                           setState(() {
                             error = 'invalid credentials';
+                            loading = false;
                           });
                         }
                       }

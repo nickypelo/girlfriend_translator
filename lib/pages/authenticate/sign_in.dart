@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/service/auth/authService.dart';
+import 'package:girlfriend_translator/utils/loading.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key, required this.toggleView});
@@ -12,15 +13,17 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  
+  bool loading = false;
+
   // text field state
   String email = '';
   String pwd = '';
   String error = '';
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.purple[100],
       appBar: AppBar(
         title: Text('Sign In', style: TextStyle(color: Colors.white),),
@@ -76,10 +79,14 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
+                    setState(() {
+                      loading = true;
+                    });
                     dynamic result = await _auth.signIn(email, pwd);
                     if(result == null){
                       setState(() {
                         error = 'invalid credentials';
+                        loading = false;
                       });
                     }
                   }
