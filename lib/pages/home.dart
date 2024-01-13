@@ -12,16 +12,23 @@ import 'package:girlfriend_translator/component/content/about.dart';
 import 'package:girlfriend_translator/component/content/food.dart';
 import 'package:girlfriend_translator/component/content/hightlight.dart';
 import 'package:girlfriend_translator/component/content/interests.dart';
+import '../service/auth/authService.dart';
 
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static Color hexColor = Color(0xFF360A14);
+  static final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: Text('logout'),
+          onPressed: () async{
+            await _auth.logoff();
+          }
+      ),
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: SingleChildScrollView(

@@ -2,38 +2,92 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/service/auth/authService.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+  const SignIn({super.key, required this.toggleView});
 
+  final Function toggleView;
   @override
   State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  
+  // text field state
+  String email = '';
+  String pwd = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.purple[100],
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: Text('Sign In', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
+        actions: [
+          TextButton.icon(
+            icon: Icon(Icons.person, color: Colors.white,),
+            label: Text('Register', style: TextStyle(color: Colors.white),),
+            onPressed: (){
+              widget.toggleView();
+            },
+          )
+        ],
       ),
       body: Container(
-        padding: EdgeInsets.all(8.0),
-        child: ElevatedButton(
-          child: Text('Sign In', style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold,)),
-          onPressed: () async{
-            dynamic result = await _auth.signInAnon();
-            if(result == null){
-              print('It could not be done');
-            }else{
-              print('We are In!');
-              print(result.uid);
-            }
-          },
-        ),
+        padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 50),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20.0,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                ),
+                validator: (value){
+                  return value!.isEmpty ? 'Enter an Email' : null;
+                },
+                onChanged: (value){
+                  setState(() {
+                    email = value;
+                  });
+                },
+              ),
+              SizedBox(height: 20.0,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                ),
+                validator: (value){
+                  return value!.length < 6 ? 'Password must have more than 6 characters' : null;
+                },
+                obscureText: true,
+                onChanged: (value){
+                  pwd = value;
+                },
+              ),
+              SizedBox(height: 20.0,),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple
+                ),
+                onPressed: () async {
+                  if(_formKey.currentState!.validate()){
+                    dynamic result = await _auth.signIn(email, pwd);
+                    if(result == null){
+                      setState(() {
+                        error = 'invalid credentials';
+                      });
+                    }
+                  }
+                },
+                child: Text('Sign In', style: TextStyle(color: Colors.white,)))
+            ],
+          ),
+        )
       ),
     );
   }
