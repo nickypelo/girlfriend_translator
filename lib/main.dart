@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/pages/greeting.dart';
 import 'package:girlfriend_translator/pages/home.dart';
 
 //firebase
