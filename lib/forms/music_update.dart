@@ -44,7 +44,7 @@ class _MusicUpdateState extends State<MusicUpdate> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
-                        await MusicRepo(uid: user.uid).createInterestData('Rhulani', _musicArtist, _musicSongName);
+                        await MusicRepo(uid: user.uid).createInterestData('rhulani', _musicArtist, _musicSongName);
                         print('Music added');
                         Navigator.pop(context);
                       }

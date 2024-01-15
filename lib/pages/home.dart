@@ -27,41 +27,42 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          child: Text('logout'),
+        backgroundColor: Colors.green[700],
+          child: Text('logout', style: TextStyle(color: Colors.white),),
           onPressed: () async{
             await _auth.logoff();
           }
       ),
-      backgroundColor: Colors.amberAccent,
+      backgroundColor: Colors.lightGreen,
       body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Profile(),
+              const Profile(),
               Accordion(
                 children: [
                   AccordionSection(
                     headerBackgroundColor: Colors.deepPurple,
-                    headerBackgroundColorOpened: Colors.purple,
+                    headerBackgroundColorOpened: Colors.green[400],
                     headerPadding: EdgeInsets.all(8.0),
-                    leftIcon: Icon(Icons.add),
+                    leftIcon: const Icon(Icons.add),
                     header: Container(
                         height: 50.0,
                         child: Center(child: Text('Word of the day', style: TextStyle(fontSize: 16.0, color: Colors.white),))),
                     content: Quote(),
                   ),
                   AccordionSection(
-                      headerBackgroundColor: Colors.amber,
+                      headerBackgroundColor: Colors.green[700],
                       headerBackgroundColorOpened: Colors.purple,
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(
                           height: 50.0,
-                          child: Center(child: Text('Current Mood', style: TextStyle(fontSize: 16.0, color: Colors.black),))),
+                          child: Center(child: Text('Current Mood', style: TextStyle(fontSize: 16.0, color: Colors.white),))),
                       content: HerMood()
                   ),
                   AccordionSection(
                       headerBackgroundColor: Colors.deepPurple,
-                      headerBackgroundColorOpened: Colors.purple,
+                      headerBackgroundColorOpened: Colors.green[400],
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(
@@ -70,18 +71,18 @@ class HomePage extends StatelessWidget {
                       content: Food()
                   ),
                   AccordionSection(
-                      headerBackgroundColor: Colors.amber,
+                      headerBackgroundColor: Colors.green[700],
                       headerBackgroundColorOpened: Colors.purple,
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(
                           height: 50.0,
-                          child: Center(child: Text('Personality', style: TextStyle(fontSize: 16.0, ),))),
+                          child: Center(child: Text('Personality', style: TextStyle(fontSize: 16.0, color: Colors.white ),))),
                       content: Personality()
                   ),
                   AccordionSection(
                       headerBackgroundColor: Colors.deepPurple,
-                      headerBackgroundColorOpened: Colors.purple,
+                      headerBackgroundColorOpened: Colors.green[400],
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(
@@ -90,18 +91,18 @@ class HomePage extends StatelessWidget {
                       content: Interests()
                   ),
                   AccordionSection(
-                      headerBackgroundColor: Colors.amber,
+                      headerBackgroundColor: Colors.green[700],
                       headerBackgroundColorOpened: Colors.purple,
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(
                           height: 50.0,
-                          child: Center(child: Text('Music', style: TextStyle(fontSize: 16.0,),))),
+                          child: Center(child: Text('Music', style: TextStyle(fontSize: 16.0, color: Colors.white),))),
                       content: Music()
                   ),
                   AccordionSection(
                       headerBackgroundColor: Colors.deepPurple,
-                      headerBackgroundColorOpened: Colors.purple,
+                      headerBackgroundColorOpened: Colors.green[400],
                       headerPadding: EdgeInsets.all(8.0),
                       leftIcon: Icon(Icons.add),
                       header: Container(

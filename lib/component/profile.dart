@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
           bottomLeft: Radius.circular(20), // Adjust radius as needed
           bottomRight: Radius.circular(20),),
         boxShadow:[ BoxShadow(color: Colors.black, blurRadius: 4.0,)],
-        color: Colors.amber,
+        color: Colors.green[600],
       ),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,

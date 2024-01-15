@@ -8,13 +8,13 @@ class Food extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // final List<FoodModel> empty = [FoodModel(foodID: '1', ladyFoodPlace: '', ladyFoodItem1: '', ladyFoodItem2: '')];
 
-    final food = Provider.of<List<FoodModel>>(context)[0];
+    // access food data
+    final food = Provider.of<List<FoodModel>>(context);
+    List<FoodModel> foodDisplay;
 
-    // access user
-
+    food.length > 3 ? foodDisplay=food.where((item) => food.indexOf(item)<3).toList() : foodDisplay= food.toList();
     return Container(
       child: Column(
         children: <Widget>[
@@ -30,19 +30,12 @@ class Food extends StatelessWidget {
               child: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),),
             ))
           ],
-          rows:  <DataRow>[
-            DataRow(cells: <DataCell>[
-              DataCell(Text("McDonald's", style: TextStyle(fontWeight: FontWeight.bold),)),
-              DataCell(Text("McTasty")),
-              DataCell(Text("McFlurry"))
-            ],),
-              DataRow(cells: <DataCell>[
-                DataCell(Text(food.ladyFoodPlace.toString(), style: TextStyle(fontWeight: FontWeight.bold),)),
-                DataCell(Text(food.ladyFoodItem1.toString())),
-                DataCell(Text(food.ladyFoodItem2.toString()))
-                ],
-            )
-          ],
+          rows:  foodDisplay.map((eish) => DataRow(
+            cells: <DataCell>[
+              DataCell(Text(eish.ladyFoodPlace.toString(), style: TextStyle(fontWeight: FontWeight.bold),)),
+              DataCell(Text(eish.ladyFoodItem1.toString())),
+              DataCell(Text(eish.ladyFoodItem2.toString()))
+            ],),).toList(),
         ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -51,7 +44,7 @@ class Food extends StatelessWidget {
                   onPressed: (){
                     Navigator.pushNamed(context, '/moreInfo', arguments: {
                       'title': 'Food',
-                      'description': [FoodModel(ladyFoodPlace: 'Kasi', ladyFoodItem1: 'Braai meat', ladyFoodItem2: 'Kota')],
+                      'description': food,
                       'name': 'food'
                     });
                   },

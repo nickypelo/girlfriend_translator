@@ -1,25 +1,36 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../model/music_model.dart';
 
 class Music extends StatelessWidget {
   const Music({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // access music data
+    final music = Provider.of<List<MusicModel>>(context);
+
+    final musicRecommended = music.where((item) => item.musicWho == 'nicholas').toList();
+    final musicHers = music.where((item) => item.musicWho == 'rhulani').toList();
     return Accordion(
         children: [
           AccordionSection(
-              headerBackgroundColor: Colors.amber,
+              headerBackgroundColor: Colors.green[700],
+              headerBackgroundColorOpened: Colors.purple[300],
               headerPadding: EdgeInsets.all(8.0),
               leftIcon: Icon(Icons.add),
-              header: Text('Recommended', style: TextStyle(fontSize: 16.0, ),),
-              content: Recommended()
+              header: Text('Recommended', style: TextStyle(fontSize: 16.0,  color: Colors.white),),
+              content: Recommended(songList: musicRecommended,)
           ),
           AccordionSection(
+              headerBackgroundColor: Colors.purple,
+              headerBackgroundColorOpened: Colors.green[400],
               headerPadding: EdgeInsets.all(8.0),
               leftIcon: Icon(Icons.add),
               header: Text('Your Favorite', style: TextStyle(fontSize: 16.0, color: Colors.white),),
-              content: YourFavorite()
+              content: YourFavorite(songList: musicHers,)
           ),
         ]
     );
@@ -27,16 +38,15 @@ class Music extends StatelessWidget {
 }
 
 class Recommended extends StatelessWidget {
-  const Recommended({super.key});
+  const Recommended({super.key, required this.songList});
 
+  final List<MusicModel> songList;
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
-        Table(
-          artist: ['Joey Badass', 'Guilty Simpson'],
-          song: ['Show Me', 'I must love you'],
-        ),
+        Table(songList: songList,),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -44,7 +54,7 @@ class Recommended extends StatelessWidget {
                 onPressed: (){
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Songs for you',
-                    'description': 'hobbies',
+                    'description': songList,
                     'name': 'myMusic'
                   });
                 },
@@ -57,16 +67,15 @@ class Recommended extends StatelessWidget {
 }
 
 class YourFavorite extends StatelessWidget {
-  const YourFavorite({super.key});
+  const YourFavorite({super.key, required this.songList});
+
+  final List<MusicModel> songList;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Table(
-          artist: ['Q', 'Kali Uchis'],
-          song: ['Presence', 'Deserve Me'],
-        ),
+        Table(songList: songList,),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -74,7 +83,7 @@ class YourFavorite extends StatelessWidget {
                 onPressed: (){
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Your Favourite Music',
-                    'description': 'hobbies',
+                    'description': songList,
                     'name': 'music'
                   });
                 },
@@ -89,10 +98,9 @@ class YourFavorite extends StatelessWidget {
 
 //Structure for the music
 class Table extends StatelessWidget {
-  final List<String> artist;
-  final List<String> song;
+  final List<MusicModel> songList;
 
-  const Table({super.key, required this.artist, required this.song});
+  const Table({super.key, required this.songList});
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +114,11 @@ class Table extends StatelessWidget {
               child: Text('Song', style: TextStyle(fontWeight: FontWeight.bold),),
             )),
           ],
-          rows:  <DataRow>[
-            DataRow(cells: <DataCell>[
-              DataCell(Text('${artist[0]}', style: TextStyle(fontWeight: FontWeight.bold),)),
-              DataCell(Text('${song[0]}')),
-            ],),
-            DataRow(cells: <DataCell>[
-              DataCell(Text('${artist[1]}', style: TextStyle(fontWeight: FontWeight.bold),)),
-              DataCell(Text('${song[1]}')),
-            ],
-            )
-          ],
+          rows:  songList.map((item) => DataRow(
+            cells: <DataCell>[
+              DataCell(Text(item.musicArtist.toString(), style: TextStyle(fontWeight: FontWeight.bold),)),
+              DataCell(Text(item.musicSongName.toString())),
+            ],),).toList(),
         )
     );
   }

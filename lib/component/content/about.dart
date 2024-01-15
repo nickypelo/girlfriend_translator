@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:girlfriend_translator/model/personality_model.dart';
+import 'package:provider/provider.dart';
 
 class Personality extends StatelessWidget {
   const Personality({super.key});
-
-  final String description = "A lady who is trying to figure herself out and enjoy life as best as she can. "
-      "Goal driven with a knack for solving mysteries. An Empath who feels strongly about life (both animals and people. Playful in nature "
-      "when with friends";
 
   final String title = "What I see.";
 
   @override
   Widget build(BuildContext context) {
+    // access personality data
+    // final personality = Provider.of<List<PersonalityModel>>(context)[0];
+    // final description  = personality.ladyPersonalityDescription;
+
+    // access personality data
+    final personality = Provider.of<List<PersonalityModel>>(context);
+    List<PersonalityModel> personalityDisplay;
+
+    personality.length > 1 ? personalityDisplay=personality.where((item) => personality.indexOf(item)<4).toList() : personalityDisplay= personality.toList();
+
     return Container(
       child: Column(
         children: <Widget>[
           Text('$title', style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('$description', overflow: TextOverflow.ellipsis, maxLines: 2,),
+          Text(personalityDisplay[0].ladyPersonalityDescription.toString(), overflow: TextOverflow.ellipsis, maxLines: 2,),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/moreInfo',arguments: {
-                      'description': description,
+                      'description': personality,
                       'title': title,
                       'name': 'about'
                     });

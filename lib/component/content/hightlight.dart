@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../model/highlight_model.dart';
 
 class Highlights extends StatelessWidget {
   const Highlights({super.key});
@@ -7,6 +10,12 @@ class Highlights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // access highlight data
+    final highlight = Provider.of<List<HighlightModel>>(context);
+    List<HighlightModel> highlightDisplay;
+
+    highlight.length > 4 ? highlightDisplay=highlight.where((item) => highlight.indexOf(item)<4).toList() : highlightDisplay= highlight.toList();
+
     return Column(
       children: <Widget>[
         ListView.builder(
@@ -14,7 +23,7 @@ class Highlights extends StatelessWidget {
           itemCount: 4,
             itemBuilder: (context, index){
             return ListTile(
-                title: Text(hightlight[index], style: TextStyle(fontSize: 14),));
+                title: Text(highlightDisplay[index].ladyHighlight.toString(), style: TextStyle(fontSize: 14),));
             }
       ),
         Row(
@@ -25,7 +34,7 @@ class Highlights extends StatelessWidget {
                   print('Indeed');
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'What I Like About You.',
-                    'description': hightlight,
+                    'description': highlight,
                     'name': 'highlight'
                   });
                 },
