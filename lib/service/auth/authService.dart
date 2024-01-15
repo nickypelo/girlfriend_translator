@@ -52,15 +52,7 @@ class AuthService{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: pwd);
       User? user = result.user;
 
-      // create a new document for the user with the uid
-      await LadyRepo(uid: user!.uid).updateUserData('Rhulani', '1 April', '31 December');
-      await PersonalityRepo(uid: user.uid).updatePersonalityData('1', 'Empath with a soft heart');
-      await InterestRepo(uid: user.uid).updateInterestData('1', 'Hiking');
-      await FoodRepo(uid: user.uid).updateFoodData('1', 'Kasi', 'Braai Meat', 'Kota');
-      await MusicRepo(uid: user.uid).updateMusicData('1', 'user', 'Guilty Simpson', 'I must Love You');
-      await HighlightRepo(uid: user.uid).updateHighlightData('1', 'Titties');
-
-      return _userFromFirebaseUser(user);
+      return _userFromFirebaseUser(user!);
     }
     catch(e){
       print(e.toString());

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:girlfriend_translator/model/highlight_model.dart';
 
 class HighlightRepo{
 
@@ -8,12 +9,23 @@ class HighlightRepo{
   // reference collection
   final CollectionReference highlightCollection = FirebaseFirestore.instance.collection('highlight');
 
-  Future updateHighlightData(String highlightID, String wifeHighlight) async{
+  Future updateHighlightData(String highlightID, String ladyHighlight) async{
     return await highlightCollection.doc(uid).set({
-      'ladyID': '1',
       'highlightID': highlightID,
-      'wifeHighlight': wifeHighlight,
+      'ladyHighlight': ladyHighlight,
     });
   }
 
+  // create highlight list from snapshot
+  List<HighlightModel> _highlightList(QuerySnapshot querySnapshot){
+    return querySnapshot.docs.map<HighlightModel>((doc) => HighlightModel(
+        highlightID: doc.get('highlightID') ?? '',
+        ladyHighlight: doc.get('ladyHighlight') ?? '',
+    )).toList();
+  }
+
+  // get highlight stream
+  Stream<List<HighlightModel>> get highlight{
+    return highlightCollection.snapshots().map(_highlightList);
+  }
 }

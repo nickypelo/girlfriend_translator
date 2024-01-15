@@ -9,9 +9,10 @@ class Music extends StatelessWidget {
     return Accordion(
         children: [
           AccordionSection(
+              headerBackgroundColor: Colors.amber,
               headerPadding: EdgeInsets.all(8.0),
               leftIcon: Icon(Icons.add),
-              header: Text('Recommended', style: TextStyle(fontSize: 16.0, color: Colors.white),),
+              header: Text('Recommended', style: TextStyle(fontSize: 16.0, ),),
               content: Recommended()
           ),
           AccordionSection(
@@ -30,9 +31,27 @@ class Recommended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      artist: ['Joey Badass', 'Guilty Simpson'],
-      song: ['Show Me', 'I must love you'],
+    return Column(
+      children: [
+        Table(
+          artist: ['Joey Badass', 'Guilty Simpson'],
+          song: ['Show Me', 'I must love you'],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, '/moreInfo', arguments: {
+                    'title': 'Songs for you',
+                    'description': 'hobbies',
+                    'name': 'myMusic'
+                  });
+                },
+                child: Text('show more'))
+          ],
+        )
+      ],
     );
   }
 }
@@ -42,9 +61,27 @@ class YourFavorite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      artist: ['Q', 'Kali Uchis'],
-      song: ['Presence', 'Deserve Me'],
+    return Column(
+      children: [
+        Table(
+          artist: ['Q', 'Kali Uchis'],
+          song: ['Presence', 'Deserve Me'],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, '/moreInfo', arguments: {
+                    'title': 'Your Favourite Music',
+                    'description': 'hobbies',
+                    'name': 'music'
+                  });
+                },
+                child: Text('show more'))
+          ],
+        )
+      ],
     );
   }
 }

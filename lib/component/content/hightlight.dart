@@ -3,16 +3,35 @@ import 'package:flutter/material.dart';
 class Highlights extends StatelessWidget {
   const Highlights({super.key});
 
-  static List<String> hightlight = ['Smile', 'Personality', 'Titties', 'Voice', 'Giggles', 'Eyes'];
+  static List<String> hightlight = ['Smile', 'Personality', 'Eyes', 'Giggles', 'Titties'];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: hightlight.length,
-        itemBuilder: (context, index){
-        return Text(hightlight[index]);
-        }
+    return Column(
+      children: <Widget>[
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: 4,
+            itemBuilder: (context, index){
+            return ListTile(
+                title: Text(hightlight[index], style: TextStyle(fontSize: 14),));
+            }
+      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+                onPressed: (){
+                  print('Indeed');
+                  Navigator.pushNamed(context, '/moreInfo', arguments: {
+                    'title': 'What I Like About You.',
+                    'description': hightlight,
+                    'name': 'highlight'
+                  });
+                },
+                child: Text('show more'))
+          ],
+        )]
     );
   }
 }

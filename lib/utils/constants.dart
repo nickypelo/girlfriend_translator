@@ -13,4 +13,4 @@ const TextStyle btn_text = TextStyle(fontSize: 16.0);
 // boxShadow
 
 // form decoration
-const textInputDecoration = InputDecoration(hintText: 'Email',);
+const textInputDecoration = InputDecoration(hintText: 'Email', );
