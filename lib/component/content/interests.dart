@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/model/interest_model.dart';
 import 'package:provider/provider.dart';
 
-class Interests extends StatelessWidget {
+class Interests extends StatefulWidget {
   const Interests({super.key});
 
-  static List<String> hobbies = ['Hiking', 'Cycling', 'Bowling', 'Animal watching', 'Fucking Nick'];
+  @override
+  State<Interests> createState() => _InterestsState();
+}
 
+class _InterestsState extends State<Interests> {
   @override
   Widget build(BuildContext context) {
 

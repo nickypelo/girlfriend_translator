@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/model/personality_model.dart';
 import 'package:provider/provider.dart';
 
-class Personality extends StatelessWidget {
+class Personality extends StatefulWidget {
   const Personality({super.key});
 
+  @override
+  State<Personality> createState() => _PersonalityState();
+}
+
+class _PersonalityState extends State<Personality> {
   final String title = "What I see.";
 
   @override

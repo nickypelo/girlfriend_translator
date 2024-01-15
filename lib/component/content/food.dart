@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/model/food_model.dart';
 import 'package:provider/provider.dart';
 
-class Food extends StatelessWidget {
+class Food extends StatefulWidget {
   const Food({super.key});
 
+  @override
+  State<Food> createState() => _FoodState();
+}
+
+class _FoodState extends State<Food> {
   @override
   Widget build(BuildContext context) {
     // final List<FoodModel> empty = [FoodModel(foodID: '1', ladyFoodPlace: '', ladyFoodItem1: '', ladyFoodItem2: '')];

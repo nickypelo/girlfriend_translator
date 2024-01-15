@@ -4,9 +4,14 @@ import 'package:provider/provider.dart';
 
 import '../../model/music_model.dart';
 
-class Music extends StatelessWidget {
+class Music extends StatefulWidget {
   const Music({super.key});
 
+  @override
+  State<Music> createState() => _MusicState();
+}
+
+class _MusicState extends State<Music> {
   @override
   Widget build(BuildContext context) {
     // access music data

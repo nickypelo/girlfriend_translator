@@ -17,11 +17,16 @@ import 'package:provider/provider.dart';
 import '../service/auth/authService.dart';
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   static final AuthService _auth = AuthService();
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
@@ -30,7 +35,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.green[700],
           child: Text('logout', style: TextStyle(color: Colors.white),),
           onPressed: () async{
-            await _auth.logoff();
+            await HomePage._auth.logoff();
           }
       ),
       backgroundColor: Colors.lightGreen,

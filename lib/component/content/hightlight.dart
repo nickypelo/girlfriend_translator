@@ -3,11 +3,14 @@ import 'package:provider/provider.dart';
 
 import '../../model/highlight_model.dart';
 
-class Highlights extends StatelessWidget {
+class Highlights extends StatefulWidget {
   const Highlights({super.key});
 
-  static List<String> hightlight = ['Smile', 'Personality', 'Eyes', 'Giggles', 'Titties'];
+  @override
+  State<Highlights> createState() => _HighlightsState();
+}
 
+class _HighlightsState extends State<Highlights> {
   @override
   Widget build(BuildContext context) {
     // access highlight data
